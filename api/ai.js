@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
+import fs from "fs"
 
 dotenv.config({ path: "../.env" });
 
@@ -35,4 +36,14 @@ export const chatWithAi = async function(systemPrompt, prompt, model) {
   
     return(completion);
 
+  }
+  
+export const transcribe = async function() {
+    const transcription = await openai.audio.transcriptions.create({
+      file: fs.createReadStream("C:\\Repos\\AIDEVS-reloaded\\mateusz.mp3"),
+      model: "whisper-1",
+      
+    });
+  
+    return transcription.text;
   }

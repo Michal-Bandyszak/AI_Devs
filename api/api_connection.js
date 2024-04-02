@@ -11,31 +11,29 @@ const apiField = {
   token: '',
 };
 
+//Function to handle axios requests
 
 async function axiosRequest(url, method, data = null, headers = { 'Content-Type': 'application/json' }) {
   try {
      const response = await axios({ url, method, data, headers });
-     return response.data; // Return the data part of the response
+     return response.data; 
   } catch (error) {
      console.error("Error in axiosRequest:", error.message);
-     throw error; // Rethrow the error to be handled by the caller
+     throw error; 
   }
  }
  
  
-
-
 // Function to get authorization token
 async function getAuthToken(taskName) {
   const url = `${API_URL}/token/${taskName}`;
   try {
-     // Assuming API_KEY should be sent as JSON in the request body
      const response = await axiosRequest(url, 'POST', { apikey: API_KEY });
-     apiField.token = response.token; // Assuming the response contains a 'token' property
+     apiField.token = response.token;
      return response.token;
   } catch (error) {
      console.error("Error in getAuthToken:", error.message);
-     throw error; // Rethrow the error to be handled by the caller
+     throw error; 
   }
  }
   
@@ -62,14 +60,13 @@ export const postQuestionToTask = async (taskName, question) => {
 
     return response.data;
   } catch (e) {
-    console.error('[error]', e); // Log the entire error object for inspection
+    console.error('[error]', e);
     throw new Error('Error occurred while sending question: ' + e.message); 
   }
   
 };
 
 // Function to show hint
-
 export async function showHint(taskName) {
   const url = `${API_URL}/hint/${taskName}`
   const hint = await axiosRequest(url, 'GET');
@@ -78,5 +75,7 @@ export async function showHint(taskName) {
 
 // Function to send answer
 export async function sendAnswer(answer) {
-  await axios.post(`${API_URL}/answer/${apiField.token}`, answer);
+  const url = `${API_URL}/answer/${apiField.token}`
+  await axiosRequest(url, 'POST', answer );
+  console.log("Answer sent successfully!")
 }

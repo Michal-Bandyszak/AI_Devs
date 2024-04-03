@@ -17,11 +17,12 @@ export const aiEmbedding = async function(phrase) {
     return response
 }
 
-export const chatWithAi = async function(systemPrompt, prompt, model) {
+export const chatWithAi = async function(systemPrompt, prompt, model, temperature = 0) {
     console.log('');
     console.log('[OpenAI] systemPrompt', systemPrompt);
     console.log('[OpenAI] prompt', prompt);
     console.log('[OpenAI] model', model);
+    console.log('[OpenAI] temperature', temperature);
   
     const completion = await openai.chat.completions.create({
       messages: [{
@@ -32,6 +33,7 @@ export const chatWithAi = async function(systemPrompt, prompt, model) {
         content: prompt,
       }],
       model,
+      temperature
     });
   
     return(completion);

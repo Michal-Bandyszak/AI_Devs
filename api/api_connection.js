@@ -43,8 +43,8 @@ export async function getTask(taskName) {
   const token = await getAuthToken(taskName);
   const url = `${API_URL}/task/${token}`
   const task = await axiosRequest(url, 'GET');
-  console.log(task.msg)
-  return task.msg
+  console.log(task)
+  return task
 }
 
 export const postQuestionToTask = async (taskName, question) => {

@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import axios from 'axios';
 
-
 dotenv.config({ path: '../.env' });
 
 const API_KEY = process.env.API_KEY;
@@ -11,7 +10,6 @@ const apiField = {
   token: '',
 };
 
-//Function to handle axios requests
 
 async function axiosRequest(url, method, data = null, headers = { 'Content-Type': 'application/json' }) {
   try {
@@ -24,7 +22,6 @@ async function axiosRequest(url, method, data = null, headers = { 'Content-Type'
  }
  
  
-// Function to get authorization token
 async function getAuthToken(taskName) {
   const url = `${API_URL}/token/${taskName}`;
   try {
@@ -38,7 +35,6 @@ async function getAuthToken(taskName) {
  }
   
 
-// Function to get task data
 export async function getTask(taskName) {
   const token = await getAuthToken(taskName);
   const url = `${API_URL}/task/${token}`
@@ -60,20 +56,18 @@ export const postQuestionToTask = async (taskName, question) => {
 
     return response.data;
   } catch (e) {
-    console.error('[error]', e);
+    console.error('[error]', e); 
     throw new Error('Error occurred while sending question: ' + e.message); 
   }
   
 };
 
-// Function to show hint
 export async function showHint(taskName) {
   const url = `${API_URL}/hint/${taskName}`
   const hint = await axiosRequest(url, 'GET');
   console.log(hint)
 }
 
-// Function to send answer
 export async function sendAnswer(answer) {
   const url = `${API_URL}/answer/${apiField.token}`
   await axiosRequest(url, 'POST', answer );

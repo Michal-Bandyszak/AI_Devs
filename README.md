@@ -17,15 +17,10 @@ This repository is organized by individual tasks from the course. Each task is c
 
 ## Technologies Used
 
-- Python
+- JavaScript
 - OpenAI API
 - Various AI and NLP libraries (specific libraries used in individual tasks)
 
-## How to Use
-
-1. Clone this repository
-2. Navigate to the specific task directory
-3. Follow the instructions in each task's README or code comments
 
 ## Note
 
